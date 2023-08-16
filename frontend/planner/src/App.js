@@ -1,19 +1,22 @@
+import React, { useState } from 'react';
 import './App.css';
-import React from 'react';
+
+
+
+let initialState =[
+  {
+    id: 1,
+    descricao:'Primeira atividade'
+  },
+  {
+    id: 1,
+    descricao:'Segunda atividade'
+  }
+];
 
 function App() {
-  
-  const atividades = [
-    {
-      id: 1,
-      descricao:'Primeira atividade'
-    },
-    {
-      id: 1,
-      descricao:'Segunda atividade'
-    }
-  ];
-
+  const [atividades, setAtividades] = useState(initialState)
+   
   return (
    <>
     <form>
@@ -23,7 +26,8 @@ function App() {
     </form>
    <div className='mt-3'>
       <ul className= "list-group">
-        {atividades.map(ativ => (<li key ={ativ.id} className='list-group-item'>{ativ.id} - {ativ.descricao}</li>
+        {atividades.map(ativ => (
+        <li key ={ativ.id} className='list-group-item'>{ativ.id} - {ativ.descricao}</li>
         ))}
       </ul>
     </div>
