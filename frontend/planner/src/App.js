@@ -27,8 +27,17 @@ function App() {
    <div className='mt-3'>
       <ul className= "list-group">
         {atividades.map(ativ => (
-        <li key ={ativ.id} className='list-group-item'>{ativ.id} - {ativ.descricao}</li>
-        ))}
+        <div className="card mb-2 shadow" style={{width: "18rem"}}>
+          <div key ={ativ.id} class="card-body">
+          <h5 className="card-title">Card title</h5>
+          <p className="card-text">
+            {ativ.id} - {ativ.descricao}
+          </p>
+          
+        </div>
+      </div>
+   
+   ))}
       </ul>
     </div>
   
