@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSmile, faPen , faTrash} from '@fortawesome/free-solid-svg-icons';
 
 let initialState =[
   {
@@ -21,19 +21,48 @@ function App() {
    <>
     <form>
       <input id="id" type ="text" placeholder="id"/>
-      <input id="descricao" type ="text" placeholder="descricao"/>
+      <input id="descricao" type ="text" placeholder="descricao" />
       <button> + Atividade</button>
     </form>
    <div className='mt-3'>
       <ul className= "list-group">
         {atividades.map(ativ => (
-        <div className="card mb-2 shadow" style={{width: "18rem"}}>
-          <div key ={ativ.id} class="card-body">
-          <h5 className="card-title">Card title</h5>
+        <div  key ={ativ.id} className="card mb-2 shadow" >
+          <div  class="card-body">
+          <div className="d-flex justify-content-between">
+          <h5 className="card-title">
+          <span className="bagde bg-secondary me-2" >
+          {ativ.id}
+          </span>
+          - titulo
+          </h5>
+          <h6>
+          Prioridade : 
+          <span className="ms-1  text-black">
+          <i className="me-1">
+            <FontAwesomeIcon icon={faSmile} /> {/* Uso do ícone aqui */}
+          </i>
+          </span>
+          Normal 
+          </h6>
+          </div>
           <p className="card-text">
-            {ativ.id} - {ativ.descricao}
+            {ativ.descricao}
           </p>
-          
+          <div className="d-flex justify-content-end pt-2 m-0 border-top">
+          <button className="btn btn-sm btn-outline-primary">
+          <i className="me-1">
+          <FontAwesomeIcon icon={faPen} />
+          </i>
+            Editar
+          </button>
+          <button className="btn btn-sm  btn-outline-danger">
+          <i className="me-1">
+          <FontAwesomeIcon icon={faTrash} />
+          </i>
+            Deletar
+          </button>
+          </div>          
         </div>
       </div>
    
