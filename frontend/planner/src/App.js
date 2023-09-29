@@ -22,14 +22,15 @@ function App() {
   const [atividades, setAtividades] = useState(initialState);
   const [idCounter, setIdCounter] = useState(3);
 
-  function addAtvidade() {
+  function addAtvidade(e) {
+    e.preventDefault();
     const atividade = {
-      id: idCounter,
+      id: document.getElementById('id').value,
       prioridade: document.getElementById('inputState').value,
       titulo: document.getElementById('titulo').value,
       descricao: document.getElementById('descricao').value,
     };
-    setAtividades([...atividades, { ...atividade }]);
+    setAtividades([ ...atividades, { ...atividade }]);
     setIdCounter(idCounter + 1);
   }
 
@@ -41,19 +42,19 @@ function App() {
         return 'Normal';
       case '3':
         return 'Alta';
-      default:
+        default:
         return 'Não definido';
     }
   }
 
-  function prioridadeStyle(param) {
+  function prioridadeStyle(param, icone) {
     switch (param) {
       case '1':
-        return 'fa-smile';
+        return icone ? 'smile' : 'success';
       case '2':
-        return 'fa-meh';
+        return icone ? 'meh' : 'dark';
       case '3':
-        return 'fa-frown';
+        return icone ? 'frown' : 'warning';
       default:
         return 'Não definido';
     }
@@ -64,7 +65,17 @@ function App() {
       <form className='row g-3'>
         <div className='col-md-6'>
           <label className='form-label'>Id</label>
-          <input id="id" type="text" className='form-control' />
+          <input id="id"
+           type="text" 
+           className='form-control' 
+          readOnly
+          value={
+            Math.max.apply(
+             Math,
+             atividades.map((item => item.id))
+             ) + 1
+            }
+          />
         </div>
         <div className='col-md-6'>
           <label className='form-label'>Prioridade</label>
@@ -86,7 +97,7 @@ function App() {
           <input id="descricao" type="text" className='form-control' />
         </div>
 
-        <div class='col-12'>
+        <div className='col-12'>
           <button className='btn btn-outline-secondary' onClick={addAtvidade}>
             + Atividade
           </button>
@@ -95,7 +106,7 @@ function App() {
       <div className='mt-3'>
         <ul className="list-group">
           {atividades.map((ativ) => (
-            <div key={ativ.id} className="card mb-2 shadow">
+            <div key={ativ.id} className={'card mb-2 shadow-sm border-'+prioridadeStyle(ativ.prioridade)}>
               <div class="card-body">
                 <div className="d-flex justify-content-between">
                   <h5 className="card-title">
@@ -119,13 +130,13 @@ function App() {
                 <div className="d-flex justify-content-end pt-2 m-0 border-top">
                   <button className="btn btn-sm btn-outline-primary">
                     <i className="me-1">
-                      <FontAwesomeIcon icon={faPen} />
+                      <FontAwesomeIcon icon={faPen}/>
                     </i>
                     Editar
                   </button>
                   <button className="btn btn-sm  btn-outline-danger">
                     <i className="me-1">
-                      <FontAwesomeIcon icon={faTrash} />
+                      <FontAwesomeIcon icon={faTrash}/>
                     </i>
                     Deletar
                   </button>
