@@ -39,41 +39,23 @@ function App() {
     const atividadesFiltradas = atividades.filter(atividade => atividade.id !== id);
    setAtividades([ ...atividadesFiltradas]);
   }
-  function prioridadeLabel(param) {
-    switch (param) {
-      case '1':
-        return 'Baixa';
-      case '2':
-        return 'Normal';
-      case '3':
-        return 'Alta';
-        default:
-        return 'Não definido';
-    }
-  }
-
-  function prioridadeStyle(param, icone) {
-    switch (param) {
-      case '1':
-        return icone ? 'smile' : 'success';
-      case '2':
-        return icone ? 'meh' : 'dark';
-      case '3':
-        return icone ? 'frown' : 'warning';
-      default:
-        return 'Não definido';
-    }
-  }
+  
 
 
 
   return (
     <>
-      <AtividadeForm addAtividade={addAtividade} atividades={atividades}/>
+      <AtividadeForm 
+      addAtividade={addAtividade} 
+      atividades={atividades}/>
+      
       <div className='mt-3'>
         <ul className="list-group">
           {atividades.map((ativ) => (
-           <Atividade />
+           <Atividade 
+           key={ativ.id} 
+           ativ={ativ}
+           deletarAtividade={deletarAtividade}/>
           ))}
         </ul>
       </div>
